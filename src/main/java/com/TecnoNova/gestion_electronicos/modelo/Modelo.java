@@ -1,5 +1,7 @@
 package com.TecnoNova.gestion_electronicos.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +19,4 @@ public class Modelo {
     @Column(name = "idModelo")
     private Integer idModelo;
     private String nombreModelo;
-    @OneToMany(mappedBy = "modelo")
-    private List<Producto> producto;
 }

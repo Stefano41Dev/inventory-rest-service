@@ -1,4 +1,5 @@
 package com.TecnoNova.gestion_electronicos.modelo;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.jdi.PrimitiveValue;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
