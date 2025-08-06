@@ -1,10 +1,9 @@
 package com.TecnoNova.gestion_electronicos.controlador;
 
-import com.TecnoNova.gestion_electronicos.dto.ProductoDto;
+import com.TecnoNova.gestion_electronicos.dto.producto.ProductoDtoRequest;
 import com.TecnoNova.gestion_electronicos.modelo.Producto;
 import com.TecnoNova.gestion_electronicos.repositorio.CategoriaRepositorio;
 import com.TecnoNova.gestion_electronicos.repositorio.ModeloRepositorio;
-import com.TecnoNova.gestion_electronicos.servicios.categoria.CategoriaServicio;
 import com.TecnoNova.gestion_electronicos.servicios.producto.ProductoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,13 +30,13 @@ public class ProductoControlador {
         return productoServicio.buscarProductoPorId(id);
     }
     @PostMapping(value = "/productos")
-    public void crearProducto(@RequestBody ProductoDto dto) {
+    public void crearProducto(@RequestBody ProductoDtoRequest dto) {
         Producto producto = new Producto();
         producto.setNombre(dto.getNombre());
         producto.setDescripcion(dto.getDescripcion());
         producto.setImagen(dto.getImagen());
-        producto.setCategoria(categoriaRepositorio.findById(dto.getId_categoria()).orElse(null));
-        producto.setModelo(modeloRepositorio.findById(dto.getId_modelo()).orElse(null));
+        producto.setCategoria(categoriaRepositorio.findById(dto.getIdCategoria()).orElse(null));
+        producto.setModelo(modeloRepositorio.findById(dto.getIdModelo()).orElse(null));
         producto.setPrecio(dto.getPrecio());
         producto.setStock(dto.getStock());
         producto.setMaxStock(dto.getMaxStock());
