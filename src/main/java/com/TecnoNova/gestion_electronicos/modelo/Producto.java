@@ -1,31 +1,34 @@
 package com.TecnoNova.gestion_electronicos.modelo;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.sun.jdi.PrimitiveValue;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Table(name = "productos")
+
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private Integer idProducto;
+    @Column(name = "id_producto")
+    private Integer idProducto;
      private String nombre;
      private String descripcion;
      private String imagen;
      @ManyToOne
-     @JoinColumn(name = "idCategoria", referencedColumnName = "idCategoria")
+     @JoinColumn(name = "id_categoria", referencedColumnName = "idCategoria")
      private Categoria categoria;
      private double precio;
      private int stock;
+     @Column(name = "max_stock")
      private int maxStock;
      private String dimensiones;
+
      @ManyToOne
-     @JoinColumn(name = "idModelo", referencedColumnName = "idModelo")
+     @JoinColumn(name = "id_modelo", referencedColumnName = "idModelo")
      private Modelo modelo;
 
 }

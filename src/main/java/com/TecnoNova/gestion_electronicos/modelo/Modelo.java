@@ -1,22 +1,25 @@
 package com.TecnoNova.gestion_electronicos.modelo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Table(name = "modelos")
 public class Modelo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idModelo")
+    @Column(name = "id_modelo")
     private Integer idModelo;
+    @Column(name = "nombre_modelo")
     private String nombreModelo;
+
+    @OneToMany(mappedBy = "modelo")
+    private List<Producto> productos;
 }
