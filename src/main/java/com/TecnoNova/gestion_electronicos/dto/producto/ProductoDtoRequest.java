@@ -1,15 +1,12 @@
 package com.TecnoNova.gestion_electronicos.dto.producto;
 
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
-public class ProductoDtoRequest {
-    private Integer idProducto;
+import org.springframework.web.multipart.MultipartFile;
+
+public class ProductoDtoRequest{
     private String nombre;
     private String descripcion;
-    private String imagen;
+    private MultipartFile imagen;
     private Integer idCategoria;
     private double precio;
     private int stock;

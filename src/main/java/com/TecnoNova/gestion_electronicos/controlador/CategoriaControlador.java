@@ -43,8 +43,6 @@ public class CategoriaControlador {
         if (categoriaActual == null) {
             return ResponseEntity.noContent().build();
         }
-        categoriaActual.setNombre(categoria.getNombre());
-        categoriaServicio.agregarCategoria(categoriaActual);
         return ResponseEntity.ok("Categoria actualizada con exito");
     }
 }

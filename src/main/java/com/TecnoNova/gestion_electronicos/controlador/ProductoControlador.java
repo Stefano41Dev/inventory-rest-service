@@ -31,17 +31,7 @@ public class ProductoControlador {
     }
     @PostMapping(value = "/productos")
     public void crearProducto(@RequestBody ProductoDtoRequest dto) {
-        Producto producto = new Producto();
-        producto.setNombre(dto.getNombre());
-        producto.setDescripcion(dto.getDescripcion());
-        producto.setImagen(dto.getImagen());
-        producto.setCategoria(categoriaRepositorio.findById(dto.getIdCategoria()).orElse(null));
-        producto.setModelo(modeloRepositorio.findById(dto.getIdModelo()).orElse(null));
-        producto.setPrecio(dto.getPrecio());
-        producto.setStock(dto.getStock());
-        producto.setMaxStock(dto.getMaxStock());
-        producto.setDimensiones(dto.getDimensiones());
-        productoServicio.guardarProducto(producto);
+
     }
     @DeleteMapping(value = "/productos/{id}")
     public ResponseEntity<?> eliminarProducto(@PathVariable int id) {
@@ -54,21 +44,9 @@ public class ProductoControlador {
     }
     @PutMapping(value = "productos/{id}")
     public ResponseEntity<?> modificarProducto(@RequestBody Producto producto, @PathVariable int id) {
-        Producto productoActual = productoServicio.buscarProductoPorId(id);
-        if (productoActual == null) {
-            return ResponseEntity.notFound().build();
-        }
-        productoActual.setNombre(producto.getNombre());
-        productoActual.setDescripcion(producto.getDescripcion());
-        productoActual.setImagen(producto.getImagen());
-        productoActual.setCategoria(producto.getCategoria());
-        productoActual.setPrecio(producto.getPrecio());
-        productoActual.setStock(producto.getStock());
-        productoActual.setMaxStock(producto.getMaxStock());
-        productoActual.setDescripcion(producto.getDescripcion());
-        productoActual.setModelo(producto.getModelo());
 
-        productoServicio.guardarProducto(productoActual);
+
+
         return ResponseEntity.ok("Producto actualizado con exito");
     }
 }
