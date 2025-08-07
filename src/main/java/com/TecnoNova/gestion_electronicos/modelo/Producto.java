@@ -9,7 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Table(name = "productos")
-
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,5 +29,6 @@ public class Producto {
     @ManyToOne
     @JoinColumn(name = "id_modelo", referencedColumnName = "idModelo")
     private Modelo modelo;
+
 
 }
