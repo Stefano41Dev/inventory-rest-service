@@ -1,33 +1,52 @@
 package com.TecnoNova.gestion_electronicos.servicios.producto;
 
+import com.TecnoNova.gestion_electronicos.dto.producto.ProductoDtoRequest;
+import com.TecnoNova.gestion_electronicos.dto.producto.ProductoDtoResponse;
+import com.TecnoNova.gestion_electronicos.mapper.producto.ProductoMapper;
 import com.TecnoNova.gestion_electronicos.modelo.Producto;
+import com.TecnoNova.gestion_electronicos.repositorio.CategoriaRepositorio;
+import com.TecnoNova.gestion_electronicos.repositorio.ModeloRepositorio;
 import com.TecnoNova.gestion_electronicos.repositorio.ProductoRepositorio;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
 @Service
+@RequiredArgsConstructor
 public class ProductoServicio implements IProductoServicio {
-    @Autowired
-    private ProductoRepositorio productoRepositorio;
+
+    private final ProductoRepositorio productoRepositorio;
+    private final ProductoMapper productoMapper;
+    private final CategoriaRepositorio categoriaRepositorio;
+    private final ModeloRepositorio modeloRepositorio;
     @Override
-    public void guardarProducto(Producto producto) {
-        productoRepositorio.save(producto);
+    public ProductoDtoResponse guardarProducto(ProductoDtoRequest dtoRequest) {
+        Producto producto = productoMapper.dtoRequestToEntity(dtoRequest);
+        producto.setCategoria(categoriaRepositorio.findById(dtoRequest.getIdCategoria())
+                .orElseThrow(()-> new RuntimeException("Categoria no encontrada")));
+        producto.setModelo(modeloRepositorio.findById(dtoRequest.getIdModelo())
+                .orElseThrow(()-> new RuntimeException("Modelo no encontrada")));
+
+        return productoMapper.entityToDtoResponse(productoRepositorio.save(producto));
     }
 
     @Override
-    public Producto buscarProductoPorId(int id) {
-        Producto producto = productoRepositorio.findById(id).orElse(null);
-        return producto;
+    public ProductoDtoResponse buscarProductoPorId(Integer id) {
+        return productoMapper.entityToDtoResponse(productoRepositorio.findById(id).orElse(null));
     }
 
     @Override
-    public void eliminarProducto(Producto producto) {
-        productoRepositorio.delete(producto);
+    public void eliminarProducto(Integer id) {
+        productoRepositorio.deleteById(id);
     }
 
     @Override
-    public List<Producto> listarProducto() {
-        return productoRepositorio.findAll();
+    public Page<ProductoDtoResponse> listarProducto(int numeroPag, int tamanhioPag) {
+        Pageable pageable = PageRequest.of(numeroPag, tamanhioPag);
+        return productoMapper.entityToDtoResponsePage(productoRepositorio.findAll(pageable));
     }
 }

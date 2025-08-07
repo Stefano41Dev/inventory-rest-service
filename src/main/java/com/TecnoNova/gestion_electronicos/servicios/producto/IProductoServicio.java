@@ -1,12 +1,14 @@
 package com.TecnoNova.gestion_electronicos.servicios.producto;
 
-import com.TecnoNova.gestion_electronicos.modelo.Producto;
+import com.TecnoNova.gestion_electronicos.dto.producto.ProductoDtoRequest;
+import com.TecnoNova.gestion_electronicos.dto.producto.ProductoDtoResponse;
+import org.springframework.data.domain.Page;
 
-import java.util.List;
+
 
 public interface IProductoServicio {
-    public void guardarProducto(Producto producto);
-    public Producto buscarProductoPorId(int id);
-    public void eliminarProducto(Producto producto);
-    public List<Producto> listarProducto();
+     ProductoDtoResponse guardarProducto(ProductoDtoRequest dtoRequest);
+     ProductoDtoResponse buscarProductoPorId(Integer id);
+     void eliminarProducto(Integer id);
+     Page<ProductoDtoResponse> listarProducto(int numeroPag,  int tamanhioPag);
 }
