@@ -49,4 +49,23 @@ public class ProductoServicio implements IProductoServicio {
         Pageable pageable = PageRequest.of(numeroPag, tamanhioPag);
         return productoMapper.entityToDtoResponsePage(productoRepositorio.findAll(pageable));
     }
+
+    @Override
+    public ProductoDtoResponse actualizarProducto(Integer id, ProductoDtoRequest dtoRequest) {
+        Producto productoActualizar = productoRepositorio.findById(id)
+                .orElseThrow(()-> new RuntimeException("Producto no encontrado"));
+
+        productoActualizar.setNombre(dtoRequest.getNombre());
+        productoActualizar.setDescripcion(dtoRequest.getDescripcion());
+        productoActualizar.setPrecio(dtoRequest.getPrecio());
+        productoActualizar.setStock(dtoRequest.getStock());
+        productoActualizar.setMaxStock(dtoRequest.getMaxStock());
+        productoActualizar.setDimensiones(dtoRequest.getDimensiones());
+        productoActualizar.setCategoria(categoriaRepositorio.findById(dtoRequest.getIdCategoria())
+                .orElseThrow(()-> new RuntimeException("Categoria no encontrada")));
+        productoActualizar.setModelo(modeloRepositorio.findById(dtoRequest.getIdModelo())
+                .orElseThrow(()->new RuntimeException("Modelo no encontrada")));
+        productoRepositorio.save(productoActualizar);
+        return productoMapper.entityToDtoResponse(productoActualizar);
+    }
 }

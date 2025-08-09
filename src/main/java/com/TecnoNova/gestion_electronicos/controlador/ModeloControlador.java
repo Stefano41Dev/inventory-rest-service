@@ -1,4 +1,4 @@
-package com.TecnoNova.gestion_electronicos.controlador;        String nombre
+package com.TecnoNova.gestion_electronicos.controlador;
 
 
 import com.TecnoNova.gestion_electronicos.modelo.Modelo;

@@ -11,4 +11,5 @@ public interface IProductoServicio {
      ProductoDtoResponse buscarProductoPorId(Integer id);
      void eliminarProducto(Integer id);
      Page<ProductoDtoResponse> listarProducto(int numeroPag,  int tamanhioPag);
+     ProductoDtoResponse actualizarProducto(Integer id, ProductoDtoRequest dtoRequest);
 }

@@ -44,11 +44,11 @@ public class ProductoControlador {
     }
     @DeleteMapping(value = "/eliminar/{id}")
     public ResponseEntity<?> eliminarProducto(@PathVariable int id) {
-       return null;
+       productoServicio.eliminarProducto(id);
+        return ResponseEntity.ok("Se elimino correctamente");
     }
     @PutMapping(value = "/editar/{id}")
-    public ResponseEntity<?> modificarProducto(@RequestBody Producto producto, @PathVariable int id) {
-        
-        return ResponseEntity.ok("Producto actualizado con exito");
+    public ResponseEntity<?> modificarProducto(@RequestBody ProductoDtoRequest dto, @PathVariable Integer id) {
+        return ResponseEntity.ok(productoServicio.actualizarProducto(id, dto));
     }
 }
