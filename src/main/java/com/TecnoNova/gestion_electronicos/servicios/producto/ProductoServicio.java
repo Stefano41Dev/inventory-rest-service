@@ -36,7 +36,7 @@ public class ProductoServicio implements IProductoServicio {
 
     @Override
     public ProductoDtoResponse buscarProductoPorId(Integer id) {
-        return productoMapper.entityToDtoResponse(productoRepositorio.findById(id).orElse(null));
+        return productoMapper.entityToDtoResponse(productoRepositorio.findById(id).orElseThrow(()-> new RuntimeException("No se encontro el producto")));
     }
 
     @Override

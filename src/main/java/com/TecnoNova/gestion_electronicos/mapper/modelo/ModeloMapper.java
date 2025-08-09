@@ -3,15 +3,13 @@ package com.TecnoNova.gestion_electronicos.mapper.modelo;
 import com.TecnoNova.gestion_electronicos.dto.modelo.ModeloDtoRequest;
 import com.TecnoNova.gestion_electronicos.dto.modelo.ModeloDtoResponse;
 import com.TecnoNova.gestion_electronicos.modelo.Modelo;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-@RequiredArgsConstructor
 public class ModeloMapper {
-    private final ModeloMapper modeloMapper;
+
     public ModeloDtoResponse entityToDtoResponse (Modelo modelo){
         return new ModeloDtoResponse(
                 modelo.getIdModelo(),

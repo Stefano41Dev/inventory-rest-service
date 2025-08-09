@@ -19,7 +19,7 @@ public class Producto {
     @Column(name = "nombre_imagen")
     private String nombreImagen;
     @ManyToOne
-    @JoinColumn(name = "id_categoria", referencedColumnName = "idCategoria")
+    @JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria")
     private Categoria categoria;
     private double precio;
     private int stock;
@@ -27,7 +27,7 @@ public class Producto {
     private int maxStock;
     private String dimensiones;
     @ManyToOne
-    @JoinColumn(name = "id_modelo", referencedColumnName = "idModelo")
+    @JoinColumn(name = "id_modelo", referencedColumnName = "id_modelo")
     private Modelo modelo;
 
 
