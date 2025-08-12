@@ -1,9 +1,9 @@
 package com.TecnoNova.gestion_electronicos.controlador;
 
-import com.TecnoNova.gestion_electronicos.modelo.Categoria;
-import com.TecnoNova.gestion_electronicos.repositorio.CategoriaRepositorio;
+import com.TecnoNova.gestion_electronicos.dto.categoria.CategoriaDtoRequest;
+import com.TecnoNova.gestion_electronicos.dto.categoria.CategoriaDtoResponse;
 import com.TecnoNova.gestion_electronicos.servicios.categoria.CategoriaServicio;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,38 +11,36 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin( origins = "http://localhost:4200")
+@RequiredArgsConstructor
 public class CategoriaControlador {
-    //esto es un controlador
-    @Autowired
-    private CategoriaServicio categoriaServicio;
+    private final CategoriaServicio categoriaServicio;
     @GetMapping(value = "/categoria")
-    public List<Categoria> listar() {
-        return categoriaServicio.listarCategorias();
+    public ResponseEntity<List<CategoriaDtoResponse>> listar() {
+        return ResponseEntity.ok(categoriaServicio.listarCategorias());
     }
     @GetMapping(value = "/categoria/{id}")
-    public Categoria buscarCategoriaPorId(@PathVariable int id) {
-        return categoriaServicio.buscarCategoriaPorId(id);
+    public ResponseEntity<CategoriaDtoResponse> buscarCategoriaPorId(@PathVariable int id) {
+        return ResponseEntity.ok(categoriaServicio.buscarCategoriaPorId(id));
     }
     @PostMapping(value = "/categoria")
-    public void guardarCategoria(@RequestBody Categoria categoria) {
-        categoriaServicio.agregarCategoria(categoria);
+    public ResponseEntity<CategoriaDtoResponse> guardarCategoria(@RequestBody CategoriaDtoRequest dto) {
+        return ResponseEntity.ok(categoriaServicio.agregarCategoria(dto));
     }
     @DeleteMapping(value = "/categiria/{id}")
-    public ResponseEntity eliminarCategoria(@PathVariable int id) {
-       Categoria categoria = categoriaServicio.buscarCategoriaPorId(id);
+    public ResponseEntity<?> eliminarCategoria(@PathVariable int id) {
+       CategoriaDtoResponse categoria = categoriaServicio.buscarCategoriaPorId(id);
        if (categoria == null) {
            return ResponseEntity.noContent().build();
        }
-       categoriaServicio.eliminarCategoria(categoria);
-       return ResponseEntity.ok().build();
+       categoriaServicio.eliminarCategoria(categoria.idCategoria());
+       return ResponseEntity.ok("Se elimino correctamente la categoria " + categoria.nombre());
     }
     @PutMapping(value = "/categorias/{id}")
-    public ResponseEntity actualizarCategoria(@RequestBody Categoria categoria, @PathVariable int id) {
-        Categoria categoriaActual = categoriaServicio.buscarCategoriaPorId(id);
+    public ResponseEntity<CategoriaDtoResponse> actualizarCategoria(@RequestBody CategoriaDtoRequest categoria, @PathVariable int id) {
+        CategoriaDtoResponse categoriaActual = categoriaServicio.buscarCategoriaPorId(id);
         if (categoriaActual == null) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok("Categoria actualizada con exito");
+        return ResponseEntity.ok(categoriaServicio.actualizarCategoria(id, categoria));
     }
 }

@@ -6,7 +6,6 @@ import com.TecnoNova.gestion_electronicos.mapper.modelo.ModeloMapper;
 import com.TecnoNova.gestion_electronicos.modelo.Modelo;
 import com.TecnoNova.gestion_electronicos.repositorio.ModeloRepositorio;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,6 +44,6 @@ public class ModeloServicio implements IModeloServicio{
 
     @Override
     public List<ModeloDtoResponse> listaModelos() {
-        return modeloRepositorio.findAll().stream().map(modeloMapper::entityToDtoResponse).toList();
+        return modeloMapper.listEntityToDtoResponses(modeloRepositorio.findAll());
     }
 }

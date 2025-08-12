@@ -4,8 +4,6 @@ import com.TecnoNova.gestion_electronicos.dto.categoria.CategoriaDtoRequest;
 import com.TecnoNova.gestion_electronicos.dto.categoria.CategoriaDtoResponse;
 import com.TecnoNova.gestion_electronicos.modelo.Categoria;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Component

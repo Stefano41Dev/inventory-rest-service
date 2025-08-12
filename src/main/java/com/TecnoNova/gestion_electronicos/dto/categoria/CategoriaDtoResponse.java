@@ -1,7 +1,7 @@
 package com.TecnoNova.gestion_electronicos.dto.categoria;
 
 public record CategoriaDtoResponse(
-        Integer idModelo,
+        Integer idCategoria,
         String nombre
 ) {
 }

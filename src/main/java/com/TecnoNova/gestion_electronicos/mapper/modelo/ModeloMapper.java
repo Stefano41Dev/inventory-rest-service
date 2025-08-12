@@ -21,7 +21,7 @@ public class ModeloMapper {
         modelo.setNombreModelo(modeloDtoRequest.nombre());
         return modelo;
     }
-    public List<ModeloDtoResponse> entityToDtoResponses (List<Modelo> modelos){
+    public List<ModeloDtoResponse> listEntityToDtoResponses (List<Modelo> modelos){
         return modelos.stream().map(this::entityToDtoResponse).toList();
     }
 }

@@ -3,10 +3,8 @@ package com.TecnoNova.gestion_electronicos.controlador;
 
 import com.TecnoNova.gestion_electronicos.dto.modelo.ModeloDtoRequest;
 import com.TecnoNova.gestion_electronicos.dto.modelo.ModeloDtoResponse;
-import com.TecnoNova.gestion_electronicos.modelo.Modelo;
 import com.TecnoNova.gestion_electronicos.servicios.modelo.ModeloServicio;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
