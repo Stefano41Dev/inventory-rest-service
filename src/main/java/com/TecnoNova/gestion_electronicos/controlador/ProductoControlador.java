@@ -7,8 +7,10 @@ import com.TecnoNova.gestion_electronicos.servicios.producto.ProductoServicio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @RestController
@@ -32,9 +34,15 @@ public class ProductoControlador {
         }
         return ResponseEntity.ok(resultado) ;
     }
-    @PostMapping(value = "/agregar")
-    public ResponseEntity<ProductoDtoResponse> crearProducto(@RequestBody ProductoDtoRequest dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(productoServicio.guardarProducto(dto));
+    @PostMapping(value = "/agregar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ProductoDtoResponse> crearProducto(@RequestPart(value = "producto", required = true) ProductoDtoRequest dto,
+                                                             @RequestPart  ("imagen") MultipartFile imagen) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(productoServicio.guardarProducto(dto,  imagen));
+    }
+    @PostMapping(value = "/agregarJson")
+    public ResponseEntity<ProductoDtoResponse> crearProductoJson(@RequestBody ProductoDtoRequest dto) {
+        MultipartFile file = null;
+        return ResponseEntity.status(HttpStatus.CREATED).body(productoServicio.guardarProducto(dto,  file));
     }
     @DeleteMapping(value = "/eliminar/{id}")
     public ResponseEntity<?> eliminarProducto(@PathVariable int id) {

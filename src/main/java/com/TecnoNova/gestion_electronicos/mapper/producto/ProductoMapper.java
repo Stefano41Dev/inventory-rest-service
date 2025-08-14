@@ -18,7 +18,7 @@ public class ProductoMapper {
                 .idProducto(producto.getIdProducto())
                 .nombre(producto.getNombre())
                 .descripcion(producto.getDescripcion())
-                .nombreImagen(producto.getNombreImagen())
+                .urlImagen(producto.getUrlImagen())
                 .categoria(categoriaMapper.entityToDtoResponse(producto.getCategoria()))
                 .precio(producto.getPrecio())
                 .stock(producto.getStock())

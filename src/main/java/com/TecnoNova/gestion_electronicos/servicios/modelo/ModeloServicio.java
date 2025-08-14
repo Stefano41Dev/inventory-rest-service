@@ -1,5 +1,6 @@
 package com.TecnoNova.gestion_electronicos.servicios.modelo;
 
+import com.TecnoNova.gestion_electronicos.config.exception.ErrorMensaje;
 import com.TecnoNova.gestion_electronicos.dto.modelo.ModeloDtoRequest;
 import com.TecnoNova.gestion_electronicos.dto.modelo.ModeloDtoResponse;
 import com.TecnoNova.gestion_electronicos.mapper.modelo.ModeloMapper;
@@ -30,13 +31,13 @@ public class ModeloServicio implements IModeloServicio{
     @Override
     public ModeloDtoResponse buscarModelo(Integer id) {
         Modelo modelo = modeloRepositorio.findById(id)
-                .orElseThrow(()-> new RuntimeException("Modelo no encontrado"));
+                .orElseThrow(()-> new ErrorMensaje("Modelo no encontrado"));
         return modeloMapper.entityToDtoResponse(modelo);
     }
     @Override
     public ModeloDtoResponse modificarModelo(Integer id,  ModeloDtoRequest dtoRequest) {
         Modelo modelo = modeloRepositorio.findById(id)
-                .orElseThrow(()-> new RuntimeException("Modelo no encontrado"));
+                .orElseThrow(()-> new ErrorMensaje("Modelo no encontrado"));
         modelo.setNombreModelo(modelo.getNombreModelo());
         modeloRepositorio.save(modelo);
         return modeloMapper.entityToDtoResponse(modelo);

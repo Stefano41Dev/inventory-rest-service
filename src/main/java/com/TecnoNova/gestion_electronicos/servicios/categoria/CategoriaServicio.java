@@ -1,5 +1,6 @@
 package com.TecnoNova.gestion_electronicos.servicios.categoria;
 
+import com.TecnoNova.gestion_electronicos.config.exception.ErrorMensaje;
 import com.TecnoNova.gestion_electronicos.dto.categoria.CategoriaDtoRequest;
 import com.TecnoNova.gestion_electronicos.dto.categoria.CategoriaDtoResponse;
 import com.TecnoNova.gestion_electronicos.mapper.categoria.CategoriaMapper;
@@ -30,13 +31,13 @@ public class CategoriaServicio implements ICategoriaServicio {
     @Override
     public CategoriaDtoResponse buscarCategoriaPorId(Integer id) {
         return categoriaMapper.entityToDtoResponse(categoriaRepositorio.findById(id)
-                .orElseThrow(()-> new RuntimeException("No se se encontro la categoria con " + id)));
+                .orElseThrow(()-> new ErrorMensaje("No se se encontro la categoria con " + id)));
     }
 
     @Override
     public CategoriaDtoResponse actualizarCategoria(Integer id, CategoriaDtoRequest dtoRequest) {
         Categoria categoria = categoriaRepositorio.findById(id)
-                .orElseThrow(()-> new RuntimeException("No se encontro la categoria con " + id));
+                .orElseThrow(()-> new ErrorMensaje("No se encontro la categoria con " + id));
         categoria.setNombreCategoria(dtoRequest.nombre());
         categoriaRepositorio.save(categoria);
         return categoriaMapper.entityToDtoResponse(categoria);
