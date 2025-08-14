@@ -9,7 +9,7 @@ Es una API sencilla donde pruebo el servicio de Cloudinary para subir las imagen
 - Guarda el API Key y el API SECRET
   ![Diagrama de arquitectura](./docs/images/cloudinary2.png)
 - Pega cada uno en las variables de entorno
-  ![Diagrama de arquitectura](./docs/images/environment-variables.png)
+  ![Diagrama de arquitectura](./docs/images/environment-variables.PNG)
 
 ## 🚀Tecnologias Usadas
  - Java 21 / Spring Boot 3
