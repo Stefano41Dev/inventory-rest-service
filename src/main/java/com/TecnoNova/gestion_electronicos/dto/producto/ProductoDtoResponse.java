@@ -9,7 +9,7 @@ public record ProductoDtoResponse (
     Integer idProducto,
     String nombre,
     String descripcion,
-    String nombreImagen,
+    String urlImagen,
     CategoriaDtoResponse categoria,
     double precio,
     int stock,

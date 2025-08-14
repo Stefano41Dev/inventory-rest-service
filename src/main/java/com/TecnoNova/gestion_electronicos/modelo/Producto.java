@@ -17,7 +17,7 @@ public class Producto {
     private String nombre;
     private String descripcion;
     @Column(name = "nombre_imagen")
-    private String nombreImagen;
+    private String urlImagen;
     @ManyToOne
     @JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria")
     private Categoria categoria;

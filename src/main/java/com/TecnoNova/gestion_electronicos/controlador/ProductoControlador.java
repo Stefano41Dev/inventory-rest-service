@@ -35,7 +35,7 @@ public class ProductoControlador {
         return ResponseEntity.ok(resultado) ;
     }
     @PostMapping(value = "/agregar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<ProductoDtoResponse> crearProducto(@RequestPart("producto") ProductoDtoRequest dto,
+    public ResponseEntity<ProductoDtoResponse> crearProducto(@RequestPart(value = "producto", required = true) ProductoDtoRequest dto,
                                                              @RequestPart  ("imagen") MultipartFile imagen) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productoServicio.guardarProducto(dto,  imagen));
     }

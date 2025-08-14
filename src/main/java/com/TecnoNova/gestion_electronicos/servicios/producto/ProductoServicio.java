@@ -17,6 +17,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Map;
+
 
 @Service
 @RequiredArgsConstructor
@@ -37,14 +39,14 @@ public class ProductoServicio implements IProductoServicio {
                 .orElseThrow(()-> new ErrorMensaje("Modelo no encontrada")));
 
         if(imagen != null) {
-            producto.setNombreImagen(imagen.getName());
             try{
-                cloudinaryService.uploadImage(imagen);
+                String imagenUrl = cloudinaryService.uploadImage(imagen);
+                producto.setUrlImagen(imagenUrl);
             }catch(Exception e){
                 throw new ErrorMensaje(e.getMessage());
             }
         }else{
-            producto.setNombreImagen("default.png");
+            producto.setUrlImagen("default.png");
         }
         return productoMapper.entityToDtoResponse(productoRepositorio.save(producto));
     }
